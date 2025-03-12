@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squat Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .counter {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .error {
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Real-Time Squat Detection</h1>
+    <div class="container">
+        <img src="{{ url_for('video_feed') }}" width="640" height="480">
+        <div class="counter">Squat Count: <span id="squat_count">{{ squat_count }}</span></div>
+        <div id="error_message" class="error"></div>
+    </div>
+
+    <script>
+        function updateSquatCount() {
+            fetch("/")
+                .then(response => response.text())
+                .then(html => {
+                    let parser = new DOMParser();
+                    let doc = parser.parseFromString(html, "text/html");
+                    let newCount = doc.querySelector("#squat_count").innerText;
+                    document.querySelector("#squat_count").innerText = newCount;
+                });
+        }
+        setInterval(updateSquatCount, 1000);
+    </script>
+</body>
+</html>
