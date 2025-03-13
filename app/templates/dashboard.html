@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <button class="toggle-btn" onclick="toggleSidebar()">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="sidebar-item" onclick="showAccountDetails()">
+            <span class="sidebar-text"></span>
+        </div>
+        <div class="sidebar-item bg-danger mt-3">
+            <a href="/dashboard" class="text-decoration-none text-white">
+                <i class="bi bi-house"></i>
+                <span class="sidebar-text">Dashboard</span>
+            </a>
+        </div> 
+        <div class="sidebar-item">
+            <a href="/exercise" class="text-decoration-none text-white">
+                <i class="bi bi-activity"></i>
+                <span class="sidebar-text">Exercise</span>
+            </a>
+        </div>        
+        <div class="sidebar-item">
+            <i class="bi bi-gear"></i>
+            <span class="sidebar-text">Settings</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div id="account-details">
+            {% if user %}
+                <h2>Welcome, {{ user.name }}</h2>
+                <p>Email: {{ user.email }}</p>
+                <p>Age: {{ user.age }}</p>
+                <p>Gender: {{ user.gender }}</p>
+                <p>Phone: {{ user.phone }}</p>
+            {% else %}
+                <p>No user data found.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 xAI Exercise Correction. All rights reserved.</p>
+    </footer>
+
+    <!-- Welcome Modal -->
+    <div class="modal fade" id="welcomeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Welcome!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Hello! Welcome to the Exercise Correction Dashboard.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

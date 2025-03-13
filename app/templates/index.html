@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Exercise Detection System</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: #fff;
+            padding: 20px;
+        }
+
+        /* Glassmorphism container */
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Button styles */
+        .button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .glass-button {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 12px 30px;
+            font-size: 1rem;
+            color: #fff;
+            text-decoration: none;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .glass-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .glass-button:active {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(1px);
+        }
+        #txt{
+            color:black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Exercise Detection System</h1>
+        <p>
+            The AI Exercise Detection System leverages cutting-edge artificial intelligence to analyze and improve your workout form in real-time. Using computer vision and machine learning, it tracks body movements during exercises like planks, squats, and bicep curls, providing instant feedback on posture and technique. Whether you're a beginner or a fitness enthusiast, this system helps you optimize your performance, prevent injuries, and achieve your fitness goals with precision and ease.
+        </p>
+        <div class="button-group">
+            <a href="/login" class="glass-button" id='txt'>Sign In</a>
+            <a href="/register" class="glass-button" id='txt'>Register</a>
+        </div>
+    </div>
+</body>
+</html>

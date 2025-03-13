@@ -1,0 +1,193 @@
+
+{% block content %}
+<div class="container">
+    <!-- Flashed Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Login Form -->
+    <h1>Sign In</h1>
+    <form method="POST" class="glass-form">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label>{{ form.email.label }}</label>
+            {{ form.email(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label>{{ form.password.label }}</label>
+            {{ form.password(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="glass-button") }}
+        </div>
+    </form>
+
+    <!-- Forgot Password Link -->
+    <a href="{{ url_for('auth.reset_password') }}" class="glass-link">Forgot Password?</a>
+</div>
+
+<style>
+    /* Base styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Arial', sans-serif;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #6e8efb, #a777e3);
+        color: #fff;
+        padding: 20px;
+    }
+
+    .container {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 40px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #fff;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Flashed Messages */
+    .alert {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+        backdrop-filter: blur(5px);
+        color: #fff;
+        position: relative;
+    }
+
+    .alert-success { background: rgba(72, 187, 120, 0.3); }
+    .alert-danger { background: rgba(245, 101, 101, 0.3); }
+    .alert-info { background: rgba(54, 162, 235, 0.3); }
+
+    .btn-close {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 1rem;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        opacity: 0.7;
+    }
+
+    .btn-close:hover {
+        opacity: 1;
+    }
+
+    /* Form Styles */
+    .glass-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form-group {
+        text-align: left;
+    }
+
+    label {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 8px;
+        color: #fff;
+        font-size: 1rem;
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        outline: none;
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    /* Submit Button */
+    .glass-button {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        padding: 12px 30px;
+        font-size: 1rem;
+        color: #333; /* Darker text for contrast */
+        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5); /* Subtle shadow for readability */
+        backdrop-filter: blur(5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .glass-button:hover {
+        background: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .glass-button:active {
+        background: rgba(255, 255, 255, 0.35);
+        transform: translateY(1px);
+    }
+
+    /* Forgot Password Link */
+    .glass-link {
+        display: inline-block;
+        margin-top: 20px;
+        color: #333; /* Darker text for contrast */
+        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5); /* Subtle shadow for readability */
+        text-decoration: none;
+        font-size: 0.9rem;
+        padding: 8px 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+    }
+
+    .glass-link:hover {
+        background: rgba(255, 255, 255, 0.2);
+        color: #000; /* Even darker on hover */
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <button class="toggle-btn" onclick="toggleSidebar()">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="sidebar-item" onclick="showAccountDetails()">
+            <i class="bi bi-person"></i>
+            <span class="sidebar-text">Account</span>
+        </div>
+        <div class="sidebar-item mt-3">
+            <a href="{{ url_for('auth.dashboard') }}" class="text-decoration-none text-white">
+                <i class="bi bi-house"></i>
+                <span class="sidebar-text">Dashboard</span>
+            </a>
+        </div>
+        <div class="sidebar-item bg-danger">
+            <a href="{{ url_for('auth.exercise') }}" class="text-decoration-none text-white">
+                <i class="bi bi-activity"></i>
+                <span class="sidebar-text">Exercise</span>
+            </a>
+        </div>
+        <div class="sidebar-item">
+            <i class="bi bi-gear"></i>
+            <span class="sidebar-text">Settings</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div id="account-details">
+            <h1>Exercises</h1>
+            {% if user %}
+                <h2>Welcome, {{ user.name }}</h2>
+            {% endif %}
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="/user/plank">Plank</a></h5>
+                            <p class="card-text">Core-strengthening exercise.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{{ url_for('auth.squat') }}">Squat</a></h5>
+                            <p class="card-text">Lower-body strength.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{{ url_for('auth.bicep') }}">Bicep Curl</a></h5>
+                            <p class="card-text">Upper-body strength.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 AI Exercise Correction. All rights reserved.</p>
+    </footer>
+{% endblock %}

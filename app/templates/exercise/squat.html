@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <button class="toggle-btn" onclick="toggleSidebar()">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="sidebar-item" onclick="showAccountDetails()">
+            <i class="bi bi-person"></i>
+            <span class="sidebar-text">Account</span>
+        </div>
+        <div class="sidebar-item mt-3">
+            <a href="{{ url_for('auth.dashboard') }}" class="text-decoration-none text-white">
+                <i class="bi bi-house"></i>
+                <span class="sidebar-text">Dashboard</span>
+            </a>
+        </div>
+        <div class="sidebar-item bg-danger">
+            <a href="{{ url_for('auth.exercise') }}" class="text-decoration-none text-white">
+                <i class="bi bi-activity"></i>
+                <span class="sidebar-text">Exercise</span>
+            </a>
+        </div>
+        <div class="sidebar-item">
+            <i class="bi bi-gear"></i>
+            <span class="sidebar-text">Settings</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div id="account-details">
+            <h1>Squat Exercise</h1>
+            {% if user %}
+                <h2>Welcome, {{ user.name }}</h2>
+            {% else %}
+                <h2>Welcome, Guest</h2>
+            {% endif %}
+            <div class="mt-4">
+                <button onclick="startExercise('squat')" class="btn btn-primary">Start Squat</button>
+                <button onclick="stopExercise('squat')" class="btn btn-danger">Stop Squat</button>
+            </div>
+            <div class="video-container mt-4">
+                <h3>Live Exercise Feed</h3>
+                <div class="video-wrapper" style="position: relative; width: 800px; height: 600px;">
+                    <img id="exercise-feed" style="width: 100%; height: 100%;" alt="Squat Detection Video" class="img-fluid">
+                    <div id="exercise-text" style="position: absolute; bottom: 10px; left: 10px; color: white; background: rgba(0, 0, 0, 0.7); padding: 10px; border-radius: 5px;">
+                        Exercise status will appear here
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 AI Exercise Correction. All rights reserved.</p>
+    </footer>
+
+    <!-- SocketIO Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"></script>
+    <script>
+        var socket = io.connect("http://127.0.0.1:5000");
+        var isStreaming = false;
+
+        function startExercise(exerciseType) {
+            if (!isStreaming) {
+                socket.emit("start_exercise", { exercise_type: exerciseType });
+                isStreaming = true;
+                document.getElementById("exercise-text").innerText = "Streaming started...";
+            }
+        }
+
+        function stopExercise(exerciseType) {
+            if (isStreaming) {
+                socket.emit("stop_exercise", { exercise_type: exerciseType });
+                isStreaming = false;
+                document.getElementById("exercise-text").innerText = "Stream stopped.";
+            }
+        }
+
+        socket.on("exercise_frame", function(data) {
+            document.getElementById("exercise-feed").src = "data:image/jpeg;base64," + data.image;
+            document.getElementById("exercise-text").innerText = "Streaming live...";
+        });
+
+        socket.on("exercise_stopped", function(data) {
+            document.getElementById("exercise-text").innerText = data.message;
+        });
+
+        socket.on("error", function(data) {
+            alert(data.message);
+            isStreaming = false;
+            document.getElementById("exercise-text").innerText = "Error: " + data.message;
+        });
+    </script>
+{% endblock %}
