@@ -270,8 +270,8 @@ This project is licensed under the [MIT License](LICENSE). Create a `LICENSE` fi
 
 ## Contact
 For inquiries or feedback:
-- **Email**: [your-email@example.com](mailto:your-email@example.com)
-- **GitHub**: [yourusername](https://github.com/yourusername)
+- **Email**: [connect.anandhukannan@gmail.com](mailto:connect.anandhukannan@gmail.com)
+- **GitHub**: [DevWithAnandhuKannan](https://github.com/DevWithAnandhuKannan/)
 
 ---
 
